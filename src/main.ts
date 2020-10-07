@@ -1,15 +1,12 @@
-import { SERVER_URL } from './constants'
-
-import { SVGParser } from './util/svg2'
+import TexDisplayable from './displayables/texdisplayable'
 
 async function main() {
-  const svg = await fetch(
-    `${SERVER_URL}/tex/${btoa(
-      '\\sum_{n=1}^\\infty \\frac{1}{n^2} = \\frac{\\pi^2}{6}'
-    )}`
-  ).then((r) => r.text())
+  const tex = await TexDisplayable.create({
+    value: '\\sum_{n=1}^\\infty \\frac{1}{n^2} = \\frac{\\pi^2}{6}',
+  })
 
-  const parser = new SVGParser(svg)
+  console.log(tex, tex.path)
+  document.body.innerHTML += tex.path
 }
 
 main()
