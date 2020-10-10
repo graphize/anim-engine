@@ -21,10 +21,8 @@ export namespace IDisplayable {
     border?: IBorder
     value: string
   }
-  export interface ITexAsyncData {
-    // subdisplayables?: Displayable[]
-    // mat?: Matrix
-    // path?: string
-    path: string
+
+  export interface ISVGParams {
+    url: string
   }
 }

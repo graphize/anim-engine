@@ -65,12 +65,9 @@ export class Displayable {
     return arr
   }
 
-  public static async _getAsyncData(params: any): Promise<any> {}
-
-  public static async create(params: IDisplayable.IParams) {
-    const d = await Displayable._getAsyncData(null)
-    const displayable = new Displayable(params)
-    return displayable
+  //* Need to be overwritten in child classes
+  public static async create(params: any) {
+    return new Displayable(params)
   }
 
   public rotate(angle: number) {
