@@ -8,6 +8,7 @@
     "build": "webpack --config webpack.config.js --mode production"
   },
   "dependencies": {
+    "flubber": "^0.4.2",
     "svg-parser": "^2.0.4"
   },
   "devDependencies": {

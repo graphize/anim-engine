@@ -4,14 +4,9 @@ import { exists, exec } from './helper'
 import { texTextToReplace, tempFolder } from './constants'
 
 export async function getTemplateTexFile() {
-  const templateTextFile = (
-    await fs.readFile('./data/tex_template.tex')
-  ).toString()
+  const templateTextFile = (await fs.readFile('./data/tex_template.tex')).toString()
 
-  const templateTexFile = templateTextFile.replace(
-    texTextToReplace,
-    '\\begin{align*}\n' + texTextToReplace + '\n\\end{align*}'
-  )
+  const templateTexFile = templateTextFile.replace(texTextToReplace, '\\begin{align*}\n' + texTextToReplace + '\n\\end{align*}')
 
   return { templateTextFile, templateTexFile }
 }
@@ -36,13 +31,7 @@ export async function texToDvi(texFile: string) {
   const fileName = texFile.replace('.tex', '.dvi')
 
   if (!(await exists(fileName))) {
-    const commands = [
-      'latex',
-      '-interaction=batchmode',
-      '-halt-on-error',
-      `-output-directory="${tempFolder}"`,
-      `"${texFile}"`,
-    ]
+    const commands = ['latex', '-interaction=batchmode', '-halt-on-error', `-output-directory="${tempFolder}"`, `"${texFile}"`]
     const { code } = await exec(commands.join(' '))
 
     if (code !== 0) {
@@ -59,15 +48,7 @@ export async function dviToSvg(dviFile: string) {
   const fileName = dviFile.replace('.dvi', '.svg')
 
   if (!(await exists(fileName))) {
-    const commands = [
-      'dvisvgm',
-      `"${dviFile}"`,
-      '-n',
-      '-v',
-      '0',
-      '-o',
-      `"${fileName}"`,
-    ]
+    const commands = ['dvisvgm', `"${dviFile}"`, '-n', '-v', '0', '-o', `"${fileName}"`]
     await exec(commands.join(' '))
   }
 
