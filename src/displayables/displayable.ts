@@ -16,13 +16,7 @@ export class Displayable {
   public mat: Matrix
   public path: string
 
-  constructor({
-    border = defaultBorderStyle,
-    fill = Color.WHITE,
-    subdisplayables = [],
-    mat = new Matrix(),
-    path = '',
-  }: IDisplayable.IParams) {
+  constructor({ border = defaultBorderStyle, fill = Color.WHITE, subdisplayables = [], mat = new Matrix(), path = '' }: IDisplayable.IParams) {
     this.border = border
     this.fill = fill
     this.subdisplayables = subdisplayables
@@ -35,15 +29,10 @@ export class Displayable {
   }
 
   public remove(...subdisplayables: Displayable[]) {
-    this.subdisplayables = this.subdisplayables.filter(
-      (s) => !subdisplayables.includes(s)
-    )
+    this.subdisplayables = this.subdisplayables.filter((s) => !subdisplayables.includes(s))
   }
 
-  protected updatePartially<T extends {}, K extends keyof Displayable>(
-    data: Partial<T>,
-    key: K
-  ) {
+  protected updatePartially<T extends {}, K extends keyof Displayable>(data: Partial<T>, key: K) {
     this[key] = {
       ...(this as any)[key],
       ...data,
@@ -58,9 +47,7 @@ export class Displayable {
   }
 
   public getFamily() {
-    const arr: Displayable[] = flat<Displayable>(
-      this.subdisplayables.map((child) => child.getFamily())
-    )
+    const arr: Displayable[] = flat<Displayable>(this.subdisplayables.map((child) => child.getFamily()))
     arr.push(this)
     return arr
   }

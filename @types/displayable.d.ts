@@ -1,9 +1,10 @@
 import Color from '../src/util/color'
 import Displayable from '../src/displayables/displayable'
+import Vector from '../src/util/vector'
 import Matrix from '../src/util/matrix'
 
 export namespace IDisplayable {
-  export interface IParams {
+  export type IParams = {
     fill?: Color
     border?: IBorder
     subdisplayables?: Displayable[]
@@ -11,18 +12,49 @@ export namespace IDisplayable {
     path?: string
   }
 
-  export interface IBorder {
+  export type IBorder = {
     color: Color
     weight: number
   }
 
-  export interface ITexParams {
+  export type ITexParams = {
     fill?: Color
     border?: IBorder
     value: string
   }
 
-  export interface ISVGParams {
+  export type ISVGParams = {
     url: string
+  }
+
+  export namespace IShapes {
+    export type IParams = {
+      fill?: Color
+      border?: IBorder
+      mat?: Matrix
+    }
+
+    export type IPolygonParams = IParams & {
+      points: Vector[]
+    }
+
+    export type ITriangleParams = IParams & {
+      width: number
+    }
+
+    export type ISquareParams = IParams & {
+      width: number
+    }
+
+    export type IRectangleParams = IParams & {
+      width: number
+      height: number
+    }
+
+    export type IRegularPolygonParams = IParams & {
+      pointsCount: number
+      radius: number
+      offset?: number
+    }
   }
 }

@@ -25,14 +25,7 @@ export class Matrix {
     const a5 = a[5]
     const v0 = v[0]
     const v1 = v[1]
-    this.values = [
-      a0,
-      a1,
-      a2,
-      a3,
-      a0 * v0 + a2 * v1 + a4,
-      a1 * v0 + a3 * v1 + a5,
-    ]
+    this.values = [a0, a1, a2, a3, a0 * v0 + a2 * v1 + a4, a1 * v0 + a3 * v1 + a5]
     return this
   }
 
@@ -61,14 +54,7 @@ export class Matrix {
     const a4 = this.values[4]
     const a5 = this.values[5]
 
-    this.values = [
-      a0 * c + a2 * s,
-      a1 * c + a3 * s,
-      a0 * -s + a2 * c,
-      a1 * -s + a3 * c,
-      a4,
-      a5,
-    ]
+    this.values = [a0 * c + a2 * s, a1 * c + a3 * s, a0 * -s + a2 * c, a1 * -s + a3 * c, a4, a5]
     return this
   }
 
