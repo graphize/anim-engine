@@ -1,24 +1,29 @@
 import { Square, Diamond, Triangle, RegularPolygon, Rectangle } from './displayables'
+import { interpolateDisplayable } from './interpolation/displayableInterpolation'
 import Vector from './util/vector'
-//@ts-ignore
-import { interpolate } from 'flubber'
+import { PI, TAU } from './constants'
+import Color from './util/color'
 
 async function main() {
-  const a = new Diamond({ width: 100 })
-  const b = new Square({ width: 100 })
+  const a = new RegularPolygon({ radius: 200, pointsCount: 3 })
+  const b = new RegularPolygon({ radius: 200, pointsCount: 10 })
+  a.translate(Vector.FROM(500, 300))
+  a.fill = Color.random()
+  b.translate(Vector.FROM(500, 300))
+  b.fill = Color.random()
   const w = 1000
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
 
-  // path.style.transform = s.mat.toString()
-
   let t = 0
   let inc = 1
-  const animator = interpolate(a.path, b.path)
+  const animators = interpolateDisplayable(a, b)
   function draw() {
-    const p = animator(t)
-    path.setAttribute('d', p)
+    const p = animators[0].animator(t)
+    path.setAttribute('d', p.path)
+    path.style.transform = p.mat.toString()
+    path.style.fill = p.fill.toHex()
     t += 0.01 * inc
     if (t > 1 || t < 0) inc *= -1
     requestAnimationFrame(draw)
