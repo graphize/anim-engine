@@ -16,7 +16,7 @@ export class Displayable {
   public mat: Matrix
   public path: string
 
-  constructor({ border = defaultBorderStyle, fill = Color.WHITE, subdisplayables = [], mat = new Matrix(), path = '' }: IDisplayable.IParams) {
+  constructor({ border = defaultBorderStyle, fill = Color.BLACK, subdisplayables = [], mat = new Matrix(), path = '' }: IDisplayable.IParams) {
     this.border = border
     this.fill = fill
     this.subdisplayables = subdisplayables

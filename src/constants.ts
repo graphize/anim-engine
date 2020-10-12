@@ -5,3 +5,5 @@ export const SERVER_URL = 'http://localhost:3000'
 export const PI = Math.PI
 export const E = Math.E
 export const TAU = PI * 2
+
+//* SVG Interpolation
