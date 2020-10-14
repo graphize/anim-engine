@@ -10,6 +10,6 @@ export namespace IInterpolation {
   }
 
   export type IPathOptions = {
-    smoothing?: number | false
+    stepSize?: number | false
   }
 }
