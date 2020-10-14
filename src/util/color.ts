@@ -13,6 +13,8 @@ export class Color {
 
   static BLACK = new Color(0, 0, 0, 255)
   static WHITE = new Color(255, 255, 255, 255)
+  static GRAY = new Color(127.5, 127.5, 127.5, 255)
+  static TRANSPARENT = new Color(0, 0, 0, 0)
 
   static fromHex(hex: string) {
     let alpha = false
@@ -79,6 +81,11 @@ export class Color {
   public toRgba() {
     const { r, g, b, a } = this
     return [r, g, b, a]
+  }
+
+  public toCss() {
+    const { r, g, b, a } = this
+    return `rgba(${r},${g},${b},${a})`
   }
 }
 

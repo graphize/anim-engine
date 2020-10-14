@@ -1,20 +1,25 @@
 import { Displayable } from '../displayables'
 import { flat } from '../util/array'
 import { IInterpolation } from '../../@types'
-import { interpolate } from './pathInterpolation'
+import { interpolatePaths } from './pathInterpolation'
 import { interpolateMatrix } from './matrixInterpolation'
-import { interpolateColors } from './colorInterpolation'
+import { interpolateColors, interpolateBorder } from './colorInterpolation'
+import { interpolateValue } from './valueInterpolation'
 
 export function interpolateProperties(a: Displayable, b: Displayable, opts: IInterpolation.IPathOptions = {}) {
   const mat = interpolateMatrix(a.mat, b.mat)
-  const path = interpolate(a.path, b.path, opts)
+  const path = interpolatePaths(a.path, b.path, opts)
   const fill = interpolateColors(a.fill, b.fill)
+  const opacity = interpolateValue(a.opacity, b.opacity)
+  const border = interpolateBorder(a.border, b.border)
   return function (t: number) {
     return new Displayable({
       ...a,
       mat: mat(t),
       path: path(t),
       fill: fill(t),
+      border: border(t),
+      opacity: opacity(t),
     })
   }
 }

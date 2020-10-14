@@ -10,6 +10,8 @@ export namespace IDisplayable {
     subdisplayables?: Displayable[]
     mat?: Matrix
     path?: string
+    parent?: Displayable | null
+    opacity?: number
   }
 
   export type IBorder = {
@@ -32,6 +34,7 @@ export namespace IDisplayable {
       fill?: Color
       border?: IBorder
       mat?: Matrix
+      opacity?: number
     }
 
     export type IPolygonParams = IParams & {
@@ -55,6 +58,14 @@ export namespace IDisplayable {
       pointsCount: number
       radius: number
       offset?: number
+    }
+
+    export type IArcParams = IParams & {
+      radiusX: number
+      radiusY: number
+      center: Vector
+      startAngle: number
+      endAngle: number
     }
   }
 }
