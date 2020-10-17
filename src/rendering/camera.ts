@@ -38,6 +38,7 @@ export class Camera {
   public setStyles(elem: SVGElement, d: Displayable) {
     elem.style.transform = d.mat.toString()
     elem.style.fill = d.fill.toCss()
+    elem.style.fillOpacity = d.fill.toCssOpacity()
     elem.style.stroke = d.border.color.toCss()
     elem.style.opacity = d.opacity.toString()
     elem.style.strokeWidth = `${d.border.weight}px`

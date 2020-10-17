@@ -11,10 +11,10 @@ export class Color {
     this.a = Math.floor(a)
   }
 
-  static BLACK = new Color(0, 0, 0, 255)
-  static WHITE = new Color(255, 255, 255, 255)
-  static GRAY = new Color(127.5, 127.5, 127.5, 255)
-  static TRANSPARENT = new Color(0, 0, 0, 0)
+  static BLACK = () => new Color(0, 0, 0, 255)
+  static WHITE = () => new Color(255, 255, 255, 255)
+  static GRAY = () => new Color(127.5, 127.5, 127.5, 255)
+  static TRANSPARENT = () => new Color(0, 0, 0, 0)
 
   static fromHex(hex: string) {
     let alpha = false
@@ -56,6 +56,11 @@ export class Color {
     return `#${((r << 16) + (g << 8) + b).toString(16).padStart(6, '0')}`
   }
 
+  public setTransparency(a: number) {
+    this.a = a
+    return this
+  }
+
   public toHsl() {
     let { r, g, b } = this
     r /= 255
@@ -84,8 +89,12 @@ export class Color {
   }
 
   public toCss() {
-    const { r, g, b, a } = this
-    return `rgba(${r},${g},${b},${a})`
+    const { r, g, b } = this
+    return `rgb(${r},${g},${b})`
+  }
+
+  public toCssOpacity() {
+    return `${this.a / 255}`
   }
 }
 

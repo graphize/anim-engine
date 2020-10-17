@@ -5,7 +5,7 @@ import Matrix from '../util/matrix'
 import Vector from '../util/vector'
 
 export const defaultBorderStyle: IDisplayable.IBorder = {
-  color: Color.GRAY,
+  color: Color.GRAY(),
   weight: 0,
 }
 
@@ -22,7 +22,7 @@ export class Displayable {
 
   constructor({
     border = defaultBorderStyle,
-    fill = Color.BLACK,
+    fill = Color.BLACK(),
     subdisplayables = [],
     mat = new Matrix(),
     path = '',
@@ -76,6 +76,7 @@ export class Displayable {
     this.fill = color
     return this
   }
+
   public setBorder(border: Partial<IDisplayable.IBorder>) {
     this.updatePartially(border, 'border')
     return this

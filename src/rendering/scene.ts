@@ -10,7 +10,7 @@ export class Scene {
   public backgroundColor: Color
   public cam: Camera | null
 
-  constructor({ backgroundColor = Color.BLACK }: IRendering.ISceneParams) {
+  constructor({ backgroundColor = Color.BLACK() }: IRendering.ISceneParams) {
     this.displayables = []
     this.backgroundColor = backgroundColor
     this.cam = null
@@ -56,7 +56,7 @@ export class Scene {
         t += map(dt, 0, a.duration * 1000, 0, 1)
         // console.log(t)
 
-        if (t <= 1.1) requestAnimationFrame(update)
+        if (t <= 1.0001) requestAnimationFrame(update)
         else {
           a.onEnd()
           res()

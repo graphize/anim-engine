@@ -1,5 +1,5 @@
 import Camera from './rendering/camera'
-import { TestScene2 } from './examples'
+import { TestScene3 } from './examples'
 
 async function main() {
   const w = 1000
@@ -15,7 +15,7 @@ async function main() {
   svg.setAttribute('height', innerHeight.toString())
   svg.setAttribute('viewBox', `0 0 ${w} ${(w * innerHeight) / innerWidth}`)
 
-  const scene = new TestScene2({})
+  const scene = new TestScene3({})
 
   await camera.renderScene(scene)
 }

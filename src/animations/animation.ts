@@ -38,6 +38,8 @@ export class Animation {
   }
 
   public update(t: number) {
+    if (t >= 1) t = 1
+
     const camera = this.camera
     if (camera !== null)
       for (const { animator, displayableA } of this.animators) {
@@ -47,7 +49,7 @@ export class Animation {
 }
 
 // Renaming base class
-export class TransformAnimation extends Animation {}
+export class Transform extends Animation {}
 
 export class FadeIn extends Animation {
   constructor({ duration, displayable }: IAnimation.IAnimationParams) {
