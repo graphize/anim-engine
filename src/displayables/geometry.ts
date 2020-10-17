@@ -1,8 +1,9 @@
 import Displayable from './displayable'
 import { IDisplayable } from '../../@types'
 import { Vector } from '../util/vector'
-import { range, map } from '../util/methods'
-import { TAU, PI } from '../constants'
+import { range, map, radians } from '../util/methods'
+import { TAU, PI, ARC_POINTS_COUNT } from '../constants'
+import Matrix from '../util/matrix'
 
 export class Polygon extends Displayable {
   public points: Vector[]
@@ -20,26 +21,63 @@ export class Polygon extends Displayable {
     return path
   }
 }
-export class RegularPolygon extends Polygon {
-  constructor({ border, pointsCount, radius, fill, mat, offset = 0, opacity }: IDisplayable.IShapes.IRegularPolygonParams) {
-    const r = radius / 2
 
-    const angles = range(pointsCount).map((i) => map(i, 0, pointsCount, 0, TAU) + offset)
-    const points = angles.map((a) => Vector.FROM(r * Math.cos(a) + r, r * Math.sin(a) + r))
+export class Arc extends Polygon {
+  constructor({
+    fill,
+    mat = new Matrix(),
+    opacity,
+    radius,
+    startAngle,
+    endAngle,
+    border,
+    degrees = false,
+    pointsCount = ARC_POINTS_COUNT,
+  }: IDisplayable.IShapes.IArcParams) {
+    if (degrees) {
+      startAngle = radians(startAngle)
+      endAngle = radians(endAngle)
+    }
 
-    super({ border, fill, mat, points, opacity })
+    const [rX, rY] = radius.values
+
+    const angles = range(pointsCount).map((i) => map(i, 0, pointsCount, startAngle, endAngle))
+    const points = angles.map((θ) => Vector.POLAR(θ, rX))
+
+    mat.scale(Vector.FROM(1, rY / rX))
+
+    super({ fill, border, mat, opacity, points })
+  }
+}
+
+export class Ellipse extends Arc {
+  constructor({ radius, border, fill, mat, opacity, pointsCount, offset = 0 }: IDisplayable.IShapes.IEllipseParams) {
+    super({ radius, border, fill, mat, opacity, pointsCount, startAngle: offset, endAngle: TAU + offset, degrees: false })
+  }
+}
+
+export class Circle extends Ellipse {
+  constructor({ radius: r, border, fill, mat, opacity, pointsCount, offset }: IDisplayable.IShapes.ICircleParams) {
+    const radius = Vector.FROM(r, r)
+    super({ radius, border, fill, mat, opacity, pointsCount, offset })
+  }
+}
+
+export class RegularPolygon extends Circle {
+  constructor({ border, pointsCount, radius, fill, mat, offset, opacity }: IDisplayable.IShapes.IRegularPolygonParams) {
+    super({ border, fill, mat, radius, pointsCount, opacity, offset })
   }
 }
 
 export class Triangle extends RegularPolygon {
   constructor({ border, width, fill, mat, opacity }: IDisplayable.IShapes.ITriangleParams) {
-    super({ border, radius: width, fill, mat, pointsCount: 3, offset: PI / 6, opacity })
+    super({ border, radius: width / 2, fill, mat, pointsCount: 3, offset: PI / 6, opacity })
   }
 }
 
 export class Diamond extends RegularPolygon {
   constructor({ border, width, fill, mat, opacity }: IDisplayable.IShapes.ISquareParams) {
-    super({ border, radius: width, fill, mat, pointsCount: 4, opacity })
+    super({ border, radius: width / 2, fill, mat, pointsCount: 4, opacity })
   }
 }
 export class Rectangle extends Polygon {
@@ -54,13 +92,3 @@ export class Square extends Rectangle {
     super({ border, width, height: width, fill, mat, opacity })
   }
 }
-
-// ! WIP
-export class Arc extends Displayable {
-  constructor({ border, center, endAngle, radiusX, radiusY, startAngle, fill, mat, opacity }: IDisplayable.IShapes.IArcParams) {
-    const [cx, cy] = center.values
-    const path = `M ${cx} ${cy + radiusY} A ${radiusX},${radiusY} 0 1,0  `
-    super({ border, fill, mat, opacity, path })
-  }
-}
-// ! END WIP

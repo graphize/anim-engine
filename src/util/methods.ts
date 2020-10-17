@@ -1,3 +1,5 @@
+import { PI } from '../constants'
+
 export function wait(s: number) {
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -12,4 +14,8 @@ export function map(value: number, start1: number, stop1: number, start2: number
 
 export function range(len: number) {
   return new Array(len).fill(0).map((_, i) => i)
+}
+
+export function radians(v: number) {
+  return (v * PI) / 180
 }

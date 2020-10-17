@@ -6,4 +6,5 @@ export const PI = Math.PI
 export const E = Math.E
 export const TAU = PI * 2
 
-//* SVG Interpolation
+//* SVG Shapes
+export const ARC_POINTS_COUNT = 200

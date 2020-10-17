@@ -61,11 +61,23 @@ export namespace IDisplayable {
     }
 
     export type IArcParams = IParams & {
-      radiusX: number
-      radiusY: number
-      center: Vector
+      radius: Vector
       startAngle: number
       endAngle: number
+      degrees?: boolean
+      pointsCount?: number
+    }
+
+    export type IEllipseParams = IParams & {
+      radius: Vector
+      pointsCount?: number
+      offset?: number
+    }
+
+    export type ICircleParams = IParams & {
+      radius: number
+      pointsCount?: number
+      offset?: number
     }
   }
 }

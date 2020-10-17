@@ -1,4 +1,4 @@
-import { RegularPolygon, Displayable, Square, Polygon, Triangle } from './displayables'
+import { RegularPolygon, Displayable, Square, Polygon, Triangle, Arc, Ellipse, Circle } from './displayables'
 import Camera from './rendering/camera'
 import { range } from './util/methods'
 import Scene from './rendering/scene'
@@ -80,6 +80,27 @@ export class TestScene3 extends Scene {
     await this.play(new Transform({ from: s, to: t }))
     await this.wait(2)
     await this.play(new FadeOut({ displayable: t }))
+  }
+}
+
+export class TestScene4 extends Scene {
+  public async define() {
+    const a = new Circle({ radius: 100 })
+
+    a.translate(Vector.FROM(200, 200))
+    // a.scale(Vector.FROM(0.1, 0.1))
+    this.play(new FadeIn({ displayable: a }))
+    const a2 = new Ellipse({
+      radius: Vector.FROM(200, 100),
+    })
+    await this.wait()
+
+    a2.translate(Vector.FROM(200, 200))
+    await this.play(new Transform({ from: a, to: a2 }))
+
+    const s = new Triangle({ width: 200 }).translate(Vector.FROM(200, 200))
+
+    await this.play(new Transform({ from: a2, to: s }))
   }
 }
 

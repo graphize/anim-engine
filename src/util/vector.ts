@@ -20,6 +20,10 @@ export class Vector {
     vec.values = [...values] as VectorValues
     return vec
   }
+
+  static POLAR(θ: number, r: number) {
+    return this.FROM(r * Math.cos(θ), r * Math.sin(θ))
+  }
 }
 
 export default Vector
