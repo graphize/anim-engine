@@ -80,7 +80,9 @@ export class Diamond extends RegularPolygon {
 }
 export class Rectangle extends Polygon {
   constructor({ border, width, height, fill, mat, opacity }: IDisplayable.IShapes.IRectangleParams) {
-    const points = [Vector.FROM(0, 0), Vector.FROM(width, 0), Vector.FROM(width, height), Vector.FROM(0, height)]
+    const w = width / 2
+    const h = height / 2
+    const points = [Vector.FROM(-w, -h), Vector.FROM(w, -h), Vector.FROM(w, h), Vector.FROM(-w, h)]
     super({ border, points, fill, mat, opacity })
   }
 }

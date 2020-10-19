@@ -17,5 +17,3 @@ export function range(len: number) {
 export function radians(v: number) {
   return (v * Math.PI) / 180
 }
-
-export const isNode = () => typeof process !== 'undefined' && process.versions !== null && process.versions.node !== null

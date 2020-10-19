@@ -1,11 +1,10 @@
 import { IDisplayable } from '../types'
-import TexDisplayable, { SERVER_URL } from './texDisplayable'
+import TexDisplayable, { SERVER_URL, defaultGetSVG } from './texDisplayable'
 
 export class TextDisplayable extends TexDisplayable {}
 
-export async function create({ value, border, fill, serverUrl = SERVER_URL }: IDisplayable.ITexParams) {
-  const url = `${serverUrl}/text/${btoa(value)}`
-  const svg = await fetch(url).then((r) => r.text())
+export async function create({ value, border, fill, getSVG = defaultGetSVG('text') }: IDisplayable.ITexParams) {
+  const svg = await getSVG(value)
   return new TextDisplayable({ path: svg, border, fill })
 }
 

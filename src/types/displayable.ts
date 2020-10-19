@@ -23,7 +23,7 @@ export namespace IDisplayable {
     fill?: Color
     border?: IBorder
     value: string
-    serverUrl?: string
+    getSVG?: (v: string) => Promise<string>
   }
 
   export type ISVGParams = {
