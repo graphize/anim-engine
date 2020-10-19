@@ -1,5 +1,5 @@
 import Displayable from './displayable'
-import { IDisplayable } from '../@types'
+import { IDisplayable } from '../types'
 import { Vector } from '../util/vector'
 import { range, map, radians } from '../util/methods'
 import { TAU, PI } from '../main'

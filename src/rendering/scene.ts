@@ -1,4 +1,4 @@
-import { IRendering } from '../@types'
+import { IRendering } from '../types'
 import { Displayable } from '../displayables'
 import Color from '../util/color'
 import { wait, map } from '../util/methods'
@@ -20,8 +20,7 @@ export class Scene {
     await this.wait(1)
   }
 
-  public bindCamera(c: Camera) 
-  {
+  public bindCamera(c: Camera) {
     this.cam = c
   }
 

@@ -1,4 +1,4 @@
-import { IDisplayable } from '../@types'
+import { IDisplayable } from '../types'
 import Color from '../util/color'
 import { flat } from '../util/array'
 import Matrix from '../util/matrix'

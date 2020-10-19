@@ -1,5 +1,5 @@
 import Camera from './rendering/camera'
-import { IRendering } from './@types'
+import { IRendering } from './types'
 
 export function defineAttributes(svg: SVGSVGElement, windowWidth: number, windowHeight: number) {
   const w = 10
@@ -15,7 +15,7 @@ export async function renderScene(cam: Camera, Scene: IRendering.ISceneConstruct
   await cam.renderScene(scene)
 }
 
-export * from './@types'
+export * from './types'
 export * from './animations/animation'
 export * from './displayables'
 export * from './rendering/camera'

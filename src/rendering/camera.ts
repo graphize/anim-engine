@@ -1,4 +1,4 @@
-import { IRendering } from '../@types'
+import { IRendering } from '../types'
 import { Displayable } from '../displayables'
 import { range } from '../util/methods'
 import Scene from './scene'

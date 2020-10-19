@@ -1,4 +1,4 @@
-import { IDisplayable } from '../@types'
+import { IDisplayable } from '../types'
 import TexDisplayable, { SERVER_URL } from './texDisplayable'
 
 export class TextDisplayable extends TexDisplayable {}

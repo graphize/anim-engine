@@ -7,9 +7,8 @@
     "target": "es5",
     "module": "commonjs",
     "rootDir": "src",
-    "types": ["node"],
     "resolveJsonModule": true,
     "outDir": "dist"
   },
-  "include": ["src", "@types"]
+  "include": ["src"]
 }

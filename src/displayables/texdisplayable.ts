@@ -1,5 +1,5 @@
 import SVGDisplayable from './svgDisplayable'
-import { IDisplayable } from '../@types'
+import { IDisplayable } from '../types'
 
 export const SERVER_URL = 'http://localhost:3000'
 

@@ -1,5 +1,5 @@
 import Displayable from './displayable'
-import { IDisplayable } from '../@types'
+import { IDisplayable } from '../types'
 
 export class SVGDisplayable extends Displayable {}
 
