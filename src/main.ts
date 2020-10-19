@@ -1,23 +1,26 @@
 import Camera from './rendering/camera'
-import { TestScene4 } from './examples'
+import { IRendering } from './@types'
 
-async function main() {
-  const w = 1000
-
-  const camera = new Camera({})
-
-  document.body.appendChild(camera.domElement)
-
-  const svg = camera.domElement
-
+export function defineAttributes(svg: SVGSVGElement, windowWidth: number, windowHeight: number) {
+  const w = 10
+  const h = (w * windowHeight) / windowWidth
   svg.classList.add('anim')
-  svg.setAttribute('width', innerWidth.toString())
-  svg.setAttribute('height', innerHeight.toString())
-  svg.setAttribute('viewBox', `0 0 ${w} ${(w * innerHeight) / innerWidth}`)
-
-  const scene = new TestScene4({})
-
-  await camera.renderScene(scene)
+  svg.setAttribute('width', windowWidth.toString())
+  svg.setAttribute('height', windowHeight.toString())
+  svg.setAttribute('viewBox', `${-w} ${-h} ${w * 2} ${h * 2}`)
 }
 
-main()
+export async function renderScene(cam: Camera, Scene: IRendering.ISceneConstructor) {
+  const scene = new Scene({})
+  await cam.renderScene(scene)
+}
+
+export * from './@types'
+export * from './animations/animation'
+export * from './displayables'
+export * from './rendering/camera'
+export * from './rendering/scene'
+export * from './util'
+export const PI = Math.PI
+export const TAU = PI * 2
+export const E = Math.E

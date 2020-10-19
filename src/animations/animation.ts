@@ -1,4 +1,4 @@
-import { IAnimation, IInterpolation } from '../../@types'
+import { IAnimation, IInterpolation } from '../@types'
 import { Displayable } from '../displayables'
 import { interpolateDisplayable } from '../interpolation/displayableInterpolation'
 import Scene from '../rendering/scene'

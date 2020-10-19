@@ -1,6 +1,6 @@
 import { Displayable } from '../displayables'
 import { flat } from '../util/array'
-import { IInterpolation } from '../../@types'
+import { IInterpolation } from '../@types'
 import { interpolatePaths } from './pathInterpolation'
 import { interpolateMatrix } from './matrixInterpolation'
 import { interpolateColors, interpolateBorder } from './colorInterpolation'

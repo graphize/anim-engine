@@ -1,12 +1,11 @@
-import { IDisplayable } from '../../@types'
-import { SERVER_URL } from '../constants'
-import TexDisplayable from './texDisplayable'
+import { IDisplayable } from '../@types'
+import TexDisplayable, { SERVER_URL } from './texDisplayable'
 
 export class TextDisplayable extends TexDisplayable {}
 
-export async function create({ value, border, fill }: IDisplayable.ITexParams) {
-  const url = `${SERVER_URL}/text/${btoa(value)}`
-  const svg = await fetch(url).then(r => r.text())
+export async function create({ value, border, fill, serverUrl = SERVER_URL }: IDisplayable.ITexParams) {
+  const url = `${serverUrl}/text/${btoa(value)}`
+  const svg = await fetch(url).then((r) => r.text())
   return new TextDisplayable({ path: svg, border, fill })
 }
 

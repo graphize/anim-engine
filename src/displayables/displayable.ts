@@ -1,4 +1,4 @@
-import { IDisplayable } from '../../@types'
+import { IDisplayable } from '../@types'
 import Color from '../util/color'
 import { flat } from '../util/array'
 import Matrix from '../util/matrix'
@@ -45,10 +45,10 @@ export class Displayable {
     return this
   }
 
-  public getDomElement() {
+  public getDomElement(doc: Document) {
     if (this.domElement === null) {
       const elementType = this.subdisplayables.length > 0 ? 'g' : 'path'
-      this.domElement = document.createElementNS('http://www.w3.org/2000/svg', elementType)
+      this.domElement = doc.createElementNS('http://www.w3.org/2000/svg', elementType)
     }
 
     return this.domElement

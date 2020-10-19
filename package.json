@@ -1,11 +1,19 @@
 {
-  "name": "anim-engine",
+  "name": "@graphize/anim-engine",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "keywords": [
+    "engine",
+    "animation",
+    "tex",
+    "svg"
+  ],
+  "author": "Hugo SALOU",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --port 9000 --inline --progress --profile --colors --watch --content-base src/ --mode development",
-    "build": "webpack --config webpack.config.js --mode production"
+    "build": "tsc",
+    "prepare": "yarn build"
   },
   "dependencies": {
     "flubber": "^0.4.2",

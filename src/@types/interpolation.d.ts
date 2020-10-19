@@ -1,4 +1,4 @@
-import { Displayable } from '../src/displayables'
+import { Displayable } from '../displayables'
 
 export namespace IInterpolation {
   export type IAnimator = (t: number) => Displayable

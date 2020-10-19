@@ -1,8 +1,8 @@
 import Displayable from './displayable'
-import { IDisplayable } from '../../@types'
+import { IDisplayable } from '../@types'
 import { Vector } from '../util/vector'
 import { range, map, radians } from '../util/methods'
-import { TAU, PI, ARC_POINTS_COUNT } from '../constants'
+import { TAU, PI } from '../main'
 import Matrix from '../util/matrix'
 
 export class Polygon extends Displayable {
@@ -21,6 +21,8 @@ export class Polygon extends Displayable {
     return path
   }
 }
+
+export const ARC_POINTS_COUNT = 200
 
 export class Arc extends Polygon {
   constructor({
@@ -63,11 +65,7 @@ export class Circle extends Ellipse {
   }
 }
 
-export class RegularPolygon extends Circle {
-  constructor({ border, pointsCount, radius, fill, mat, offset, opacity }: IDisplayable.IShapes.IRegularPolygonParams) {
-    super({ border, fill, mat, radius, pointsCount, opacity, offset })
-  }
-}
+export class RegularPolygon extends Circle {}
 
 export class Triangle extends RegularPolygon {
   constructor({ border, width, fill, mat, opacity }: IDisplayable.IShapes.ITriangleParams) {

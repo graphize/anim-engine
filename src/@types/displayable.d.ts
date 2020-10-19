@@ -1,7 +1,7 @@
-import Color from '../src/util/color'
-import Displayable from '../src/displayables/displayable'
-import Vector from '../src/util/vector'
-import Matrix from '../src/util/matrix'
+import Color from '../util/color'
+import Displayable from '../displayables/displayable'
+import Vector from '../util/vector'
+import Matrix from '../util/matrix'
 
 export namespace IDisplayable {
   export type IParams = {
@@ -23,6 +23,7 @@ export namespace IDisplayable {
     fill?: Color
     border?: IBorder
     value: string
+    serverUrl?: string
   }
 
   export type ISVGParams = {
@@ -52,12 +53,6 @@ export namespace IDisplayable {
     export type IRectangleParams = IParams & {
       width: number
       height: number
-    }
-
-    export type IRegularPolygonParams = IParams & {
-      pointsCount: number
-      radius: number
-      offset?: number
     }
 
     export type IArcParams = IParams & {

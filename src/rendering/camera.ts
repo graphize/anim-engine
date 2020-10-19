@@ -1,18 +1,19 @@
-import { IRendering } from '../../@types'
-import Color from '../util/color'
+import { IRendering } from '../@types'
 import { Displayable } from '../displayables'
 import { range } from '../util/methods'
 import Scene from './scene'
 
 export class Camera {
   public domElement: SVGSVGElement
+  public document: Document
 
-  constructor({}: IRendering.ICameraParams) {
+  constructor({ document }: IRendering.ICameraParams) {
+    this.document = document
     this.domElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   }
 
   public render(d: Displayable, original: Displayable) {
-    const domElement = original.getDomElement()
+    const domElement = original.getDomElement(this.document)
     if (!original.appendedToDom) {
       this.domElement.appendChild(domElement)
       original.appendedToDom = true
@@ -41,7 +42,14 @@ export class Camera {
     elem.style.fillOpacity = d.fill.toCssOpacity()
     elem.style.stroke = d.border.color.toCss()
     elem.style.opacity = d.opacity.toString()
-    elem.style.strokeWidth = `${d.border.weight}px`
+    elem.style.strokeWidth = `${d.border.weight / 40}`
+  }
+
+  protected updatePartially<T extends {}, K extends keyof Camera>(data: Partial<T>, key: K) {
+    this[key] = {
+      ...(this as any)[key],
+      ...data,
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import Color from '../util/color'
 import { map } from '../util/methods'
-import { IDisplayable } from '../../@types'
+import { IDisplayable } from '../@types'
 import { interpolateValue } from './valueInterpolation'
 
 function noNaN(a: number[]) {

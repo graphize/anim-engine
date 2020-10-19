@@ -1,5 +1,3 @@
-import { PI } from '../constants'
-
 export function wait(s: number) {
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -17,5 +15,7 @@ export function range(len: number) {
 }
 
 export function radians(v: number) {
-  return (v * PI) / 180
+  return (v * Math.PI) / 180
 }
+
+export const isNode = () => typeof process !== 'undefined' && process.versions !== null && process.versions.node !== null
