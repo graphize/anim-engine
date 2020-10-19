@@ -13,12 +13,14 @@ export class Scene {
   public cam: Camera | null
 
   public updateTime: IRendering.ITimeUpdater
+  public timeInterval: IRendering.ITimeInterval
 
-  constructor({ backgroundColor = Color.BLACK(), updateTime = defaultTimeUpdater }: IRendering.ISceneParams) {
+  constructor({ backgroundColor = Color.BLACK(), updateTime = defaultTimeUpdater, timeInterval = requestAnimationFrame }: IRendering.ISceneParams) {
     this.displayables = []
     this.backgroundColor = backgroundColor
     this.cam = null
     this.updateTime = updateTime
+    this.timeInterval = timeInterval
   }
 
   public async define() {
@@ -61,13 +63,13 @@ export class Scene {
         t += this.updateTime(dt, a)
         // console.log(t)
 
-        if (t <= 1.0001) requestAnimationFrame(update)
+        if (t <= 1.0001) this.timeInterval(update)
         else {
           a.onEnd()
           res()
         }
       }
-      requestAnimationFrame(update)
+      this.timeInterval(update)
     })
   }
 }
