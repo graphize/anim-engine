@@ -1,5 +1,6 @@
 import Camera from './rendering/camera'
 import { IRendering } from './types'
+import * as math from 'mathjs'
 
 export function defineAttributes(svg: SVGSVGElement, windowWidth: number, windowHeight: number) {
   const w = 10
@@ -21,6 +22,7 @@ export * from './displayables'
 export * from './rendering/camera'
 export * from './rendering/scene'
 export * from './util'
+export { math }
 export const PI = Math.PI
 export const TAU = PI * 2
 export const E = Math.E

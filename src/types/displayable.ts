@@ -30,6 +30,35 @@ export namespace IDisplayable {
     url: string
   }
 
+  export namespace IGraph {
+    export type IMinMax = {
+      min: number
+      max: number
+    }
+
+    export type IRange = {
+      x: IMinMax
+      y: IMinMax
+    }
+
+    export type IParams = {
+      fill?: Color
+      border?: IBorder
+      f: (x: number) => number
+      minMax: IRange
+      mat?: Matrix
+      opacity?: number
+      pointsCount?: number
+    }
+
+    export type IRiemannRectanglesParams = {
+      count: number
+      minMax?: IMinMax
+      fillGradient?: [Color, Color]
+      borderGradient?: [IBorder, IBorder]
+    }
+  }
+
   export namespace IShapes {
     export type IParams = {
       fill?: Color
@@ -40,6 +69,7 @@ export namespace IDisplayable {
 
     export type IPolygonParams = IParams & {
       points: Vector[]
+      notConnectedToStart?: boolean
     }
 
     export type ITriangleParams = IParams & {

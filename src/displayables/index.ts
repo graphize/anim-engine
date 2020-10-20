@@ -9,3 +9,4 @@ export const TextDisplayable = { ..._TextDisplayable, create: createTextD }
 export const SVGDisplayable = { ..._SVGDisplayable, create: createSVGD }
 
 export * from './geometry'
+export { Graph } from './graphDisplayable'

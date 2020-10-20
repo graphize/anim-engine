@@ -7,8 +7,15 @@ import Matrix from '../util/matrix'
 
 export class Polygon extends Displayable {
   public points: Vector[]
-  constructor({ border, fill, points, mat, opacity }: IDisplayable.IShapes.IPolygonParams) {
-    const path = points.map(({ values }, i) => `${i === 0 ? 'M' : 'L'} ${values[0]} ${values[1]}`).join(' ') + ' Z'
+  constructor({ border, fill, points, mat, opacity, notConnectedToStart = false }: IDisplayable.IShapes.IPolygonParams) {
+    const path =
+      points.map(({ values }, i) => `${i === 0 ? 'M' : 'L'} ${values[0]} ${values[1]}`).join(' ') +
+      (notConnectedToStart
+        ? points
+            .reverse()
+            .map(({ values }, i) => `L ${values[0]} ${values[1]}`)
+            .join(' ') + ' Z'
+        : ' Z')
 
     super({ mat, border, fill, path, opacity })
 
