@@ -15,6 +15,15 @@ export class Vector {
     this.values = this.values.map((val, i) => val - v.values[i]) as VectorValues
   }
 
+  public magSq() {
+    const [x, y] = this.values
+    return x * x + y * y
+  }
+
+  public mag() {
+    return Math.sqrt(this.magSq())
+  }
+
   static FROM(...values: VectorValues) {
     const vec = new Vector()
     vec.values = [...values] as VectorValues

@@ -43,7 +43,7 @@ export class Scene {
     await wait(t)
   }
 
-  public play(a: Animation) {
+  private _play(a: Animation) {
     return new Promise((res, rej) => {
       let dt = 0
       let prevTime = Date.now()
@@ -71,6 +71,10 @@ export class Scene {
       }
       this.timeInterval(update)
     })
+  }
+
+  public async play(...animations: Animation[]) {
+    await Promise.all(animations.map((animation) => this._play(animation)))
   }
 }
 

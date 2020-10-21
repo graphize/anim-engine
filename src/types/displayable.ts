@@ -36,7 +36,12 @@ export namespace IDisplayable {
       max: number
     }
 
-    export type IRange = {
+    export type IAxisParams = {
+      arrows?: boolean
+      minMax: IXYRange
+    }
+
+    export type IXYRange = {
       x: IMinMax
       y: IMinMax
     }
@@ -45,7 +50,7 @@ export namespace IDisplayable {
       fill?: Color
       border?: IBorder
       f: (x: number) => number
-      minMax: IRange
+      minMax: IXYRange
       mat?: Matrix
       opacity?: number
       pointsCount?: number
@@ -56,6 +61,7 @@ export namespace IDisplayable {
       minMax?: IMinMax
       fillGradient?: [Color, Color]
       borderGradient?: [IBorder, IBorder]
+      positiveOnly?: boolean
     }
   }
 
@@ -69,7 +75,6 @@ export namespace IDisplayable {
 
     export type IPolygonParams = IParams & {
       points: Vector[]
-      notConnectedToStart?: boolean
     }
 
     export type ITriangleParams = IParams & {
@@ -103,6 +108,11 @@ export namespace IDisplayable {
       radius: number
       pointsCount?: number
       offset?: number
+    }
+
+    export type ILineParams = IParams & {
+      from: Vector
+      to: Vector
     }
   }
 }
