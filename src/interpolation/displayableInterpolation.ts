@@ -44,8 +44,8 @@ export function interpolateDisplayable(a: Displayable, b: Displayable, opts: IIn
           }
         : {
             displayableA: displayable,
-            displayableB: pathsB[pathsB.length],
-            animator: interpolateProperties(displayable, pathsB[pathsB.length], opts),
+            displayableB: pathsB[pathsB.length - 1],
+            animator: interpolateProperties(displayable, pathsB[pathsB.length - 1], opts),
           }
     )
   } else {
@@ -58,9 +58,9 @@ export function interpolateDisplayable(a: Displayable, b: Displayable, opts: IIn
             animator: interpolateProperties(pathsA[i], displayable, opts),
           }
         : {
-            displayableA: pathsA[pathsA.length],
+            displayableA: pathsA[pathsA.length - 1],
             displayableB: displayable,
-            animator: interpolateProperties(pathsA[pathsA.length], displayable, opts),
+            animator: interpolateProperties(pathsA[pathsA.length - 1], displayable, opts),
           }
     )
   }

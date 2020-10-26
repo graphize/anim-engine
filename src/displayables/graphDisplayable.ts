@@ -5,7 +5,7 @@ import { PI } from '../main'
 import Displayable from './displayable'
 
 // TODO Render hyperbolas (currently impossible)
-export function generatePointsFromFunction(f: (x: number) => number, minMax: IDisplayable.IGraph.IXYRange, pointsCount: number) {
+export function generatePointsFromFunction(f: (x: number) => number, minMax: IDisplayable.IXYRange, pointsCount: number) {
   minMax = extendXYRange(minMax)
   const xMin = minMax.x.min
   const xMax = minMax.x.max
@@ -29,14 +29,14 @@ export function generatePointsFromFunction(f: (x: number) => number, minMax: IDi
   return points
 }
 
-function extendRange({ max, min }: IDisplayable.IGraph.IMinMax, n: number = 1): IDisplayable.IGraph.IMinMax {
+function extendRange({ max, min }: IDisplayable.IMinMax, n: number = 1): IDisplayable.IMinMax {
   return {
     max: max + n,
     min: min - n,
   }
 }
 
-function extendXYRange({ x, y }: IDisplayable.IGraph.IXYRange, n: number = 1): IDisplayable.IGraph.IXYRange {
+function extendXYRange({ x, y }: IDisplayable.IXYRange, n: number = 1): IDisplayable.IXYRange {
   return {
     x: extendRange(x, n),
     y: extendRange(y, n),
@@ -49,12 +49,12 @@ function generatePathFromPoints(points: Vector[]) {
 
 export class Graph extends Displayable {
   public f: (x: number) => number
-  public minMax: IDisplayable.IGraph.IXYRange
+  public minMax: IDisplayable.IXYRange
 
-  constructor({ f, minMax, border, fill, mat, opacity, pointsCount = ARC_POINTS_COUNT }: IDisplayable.IGraph.IParams) {
+  constructor({ f, minMax, border, fill, mat, opacity, pointsCount = ARC_POINTS_COUNT, doc }: IDisplayable.IGraph.IParams) {
     const points = generatePointsFromFunction(f, minMax, pointsCount)
     const path = generatePathFromPoints(points)
-    super({ border, fill, mat, opacity, path })
+    super({ border, fill, mat, opacity, path, doc })
     this.f = f
     this.minMax = minMax
   }

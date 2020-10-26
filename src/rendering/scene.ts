@@ -2,7 +2,7 @@ import { IRendering } from '../types'
 import { Displayable } from '../displayables'
 import Color from '../util/color'
 import { wait, map } from '../util/methods'
-import Animation from '../animations/animation'
+import Animation, { AnimationGroup } from '../animations/animation'
 import Camera from './camera'
 
 export const defaultTimeUpdater: IRendering.ITimeUpdater = (dt, a) => map(dt, 0, a.duration * 1000, 0, 1)
@@ -43,11 +43,17 @@ export class Scene {
     await wait(t)
   }
 
+  private _playGroup(a: AnimationGroup) {
+    return this.play(...a.animations)
+  }
+
   private _play(a: Animation) {
+    if (a instanceof AnimationGroup) return this._playGroup(a)
+
     return new Promise((res, rej) => {
       let dt = 0
       let prevTime = Date.now()
-      let t = 0
+      let t = -a.delay
 
       if (this.cam !== null) a.bindElements(this, this.cam)
 
@@ -58,15 +64,19 @@ export class Scene {
         dt = d - prevTime
         prevTime = d
 
-        a.update(t)
-
-        t += this.updateTime(dt, a)
-        // console.log(t)
-
-        if (t <= 1.0001) this.timeInterval(update)
-        else {
+        if (t > 1) {
+          t = 1
+          const x = a.easing(t)
+          a.update(x)
           a.onEnd()
           res()
+        } else {
+          const x = a.easing(t)
+          a.update(x)
+
+          t += this.updateTime(dt, a)
+
+          this.timeInterval(update)
         }
       }
       this.timeInterval(update)

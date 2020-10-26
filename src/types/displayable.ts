@@ -2,6 +2,7 @@ import Color from '../util/color'
 import Displayable from '../displayables/displayable'
 import Vector from '../util/vector'
 import Matrix from '../util/matrix'
+import { ElementNode } from 'svg-parser'
 
 export namespace IDisplayable {
   export type IParams = {
@@ -12,11 +13,15 @@ export namespace IDisplayable {
     path?: string
     parent?: Displayable | null
     opacity?: number
+    id?: string
+    doc?: Document
   }
 
   export type IBorder = {
     color: Color
     weight: number
+    offset?: number
+    array?: number
   }
 
   export type ITexParams = {
@@ -24,26 +29,44 @@ export namespace IDisplayable {
     border?: IBorder
     value: string
     getSVG?: (v: string) => Promise<string>
+    doc?: Document
+  }
+  export type IGroupParams = {
+    displayables: Displayable[]
+    mat?: Matrix
+    doc?: Document
   }
 
-  export type ISVGParams = {
-    url: string
+  export namespace ISVG {
+    export type IParams = {
+      url: string
+      doc?: Document
+    }
+
+    export type IDisplayableParams = {
+      svg: string
+      doc?: Document
+    }
+
+    export type IExtendedElementNode = ElementNode & {
+      mat?: Matrix
+    }
+  }
+
+  export type IMinMax = {
+    min: number
+    max: number
+  }
+
+  export type IXYRange = {
+    x: IMinMax
+    y: IMinMax
   }
 
   export namespace IGraph {
-    export type IMinMax = {
-      min: number
-      max: number
-    }
-
     export type IAxisParams = {
       arrows?: boolean
       minMax: IXYRange
-    }
-
-    export type IXYRange = {
-      x: IMinMax
-      y: IMinMax
     }
 
     export type IParams = {
@@ -54,6 +77,7 @@ export namespace IDisplayable {
       mat?: Matrix
       opacity?: number
       pointsCount?: number
+      doc?: Document
     }
 
     export type IRiemannRectanglesParams = {
@@ -71,6 +95,7 @@ export namespace IDisplayable {
       border?: IBorder
       mat?: Matrix
       opacity?: number
+      doc?: Document
     }
 
     export type IPolygonParams = IParams & {

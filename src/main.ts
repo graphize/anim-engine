@@ -12,12 +12,13 @@ export function defineAttributes(svg: SVGSVGElement, windowWidth: number, window
 }
 
 export async function renderScene(cam: Camera, Scene: IRendering.ISceneConstructor) {
-  const scene = new Scene({})
+  const scene = new Scene({ timeInterval: (f) => requestAnimationFrame(f) })
   await cam.renderScene(scene)
 }
 
 export * from './types'
 export * from './animations/animation'
+export * from './animations/easing'
 export * from './displayables'
 export * from './rendering/camera'
 export * from './rendering/scene'
