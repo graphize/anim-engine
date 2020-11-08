@@ -23,6 +23,14 @@ export class Color {
   static GRAY = () => new Color(127.5, 127.5, 127.5, 255)
   static TRANSPARENT = () => new Color(0, 0, 0, 0)
 
+  static RED = () => new Color(255, 0, 0, 255)
+  static GREEN = () => new Color(0, 255, 0, 255)
+  static BLUE = () => new Color(0, 0, 255, 255)
+
+  static CYAN = () => new Color(0, 255, 255, 255)
+  static YELLOW = () => new Color(255, 255, 0, 255)
+  static MAGENTA = () => new Color(255, 0, 255, 255)
+
   static fromHex(hex: string, alpha: number = 255) {
     const [r, g, b] = colorConvert.hex.rgb(hex)
     return new Color(r, g, b, alpha)

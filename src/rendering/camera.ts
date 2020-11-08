@@ -12,7 +12,7 @@ export class Camera {
     this.domElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   }
 
-  public render(d: Displayable, original: Displayable, elem: SVGElement = this.domElement) {
+  public render(d: Displayable, original: Displayable, elem: SVGElement = this.domElement): void {
     const domElement = original.getDomElement()
     if (!original.appendedToDom) {
       elem.appendChild(domElement)
@@ -20,6 +20,8 @@ export class Camera {
     }
 
     this.setStyles(domElement, d)
+
+    if (d.id.length > 0) domElement.setAttribute('id', d.id)
 
     if (d.path.length > 0) domElement.setAttribute('d', d.path)
 

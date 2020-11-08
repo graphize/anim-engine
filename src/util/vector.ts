@@ -34,6 +34,12 @@ export class Vector {
     return Math.sqrt(this.magSq())
   }
 
+  public angle() {
+    const [x, y] = this.values
+
+    return Math.atan(y / x)
+  }
+
   public mult(c: number) {
     this.values = this.values.map((v) => v * c) as VectorValues
     return this

@@ -10,13 +10,13 @@ export namespace IAnimation {
 
   export type IEasingFunction = (t: number) => number
 
-  export type IAnimationFromToParams = IParams & {
-    from: Displayable
-    to: Displayable
+  export type IAnimationFromToParams<IFromDisplayableType extends Displayable, IToDisplayableType extends Displayable> = IParams & {
+    from: IFromDisplayableType
+    to: IToDisplayableType
   }
 
-  export type IAnimationParams = IParams & {
-    displayable: Displayable
+  export type IAnimationParams<IDisplayableType extends Displayable> = IParams & {
+    displayable: IDisplayableType
   }
 
   export type IAnimationGroupParams = {

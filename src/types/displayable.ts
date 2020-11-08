@@ -3,6 +3,7 @@ import Displayable from '../displayables/displayable'
 import Vector from '../util/vector'
 import Matrix from '../util/matrix'
 import { ElementNode } from 'svg-parser'
+import { Graph } from '../displayables'
 
 export namespace IDisplayable {
   export type IParams = {
@@ -56,6 +57,8 @@ export namespace IDisplayable {
   export type IMinMax = {
     min: number
     max: number
+
+    interval?: number
   }
 
   export type IXYRange = {
@@ -64,20 +67,26 @@ export namespace IDisplayable {
   }
 
   export namespace IGraph {
-    export type IAxisParams = {
-      arrows?: boolean
+    export type IFunctionGraphParams = {
+      fill: Color
+      border: IBorder
+      f: (x: number) => number
+      df: (x: number) => number
       minMax: IXYRange
+      mat: Matrix
+      opacity: number
+      pointsCount: number
+      doc: Document
+      graph: Graph
     }
 
-    export type IParams = {
-      fill?: Color
-      border?: IBorder
-      f: (x: number) => number
+    export type IGraphParams = {
+      color?: Color
       minMax: IXYRange
       mat?: Matrix
-      opacity?: number
       pointsCount?: number
       doc?: Document
+      arrows?: boolean
     }
 
     export type IRiemannRectanglesParams = {

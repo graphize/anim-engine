@@ -11,6 +11,8 @@ export const defaultBorderStyle: IDisplayable.IBorder = {
   weight: 0,
 }
 
+export const randomID = () => Math.random().toString(36).substr(2, 9)
+
 export class Displayable {
   public border: IDisplayable.IBorder
   public fill: Color
@@ -21,7 +23,7 @@ export class Displayable {
   public domElement: SVGPathElement | SVGGElement | null
   public appendedToDom: boolean
   public opacity: number // from 0 to 1
-  public id?: string
+  public id: string
   public doc: Document
 
   constructor({
@@ -32,7 +34,7 @@ export class Displayable {
     path = '',
     parent = null,
     opacity = 1,
-    id,
+    id = randomID(),
     doc = document,
   }: IDisplayable.IParams) {
     this.border = border
@@ -101,11 +103,19 @@ export class Displayable {
     this.mat.rotate(angle)
     return this
   }
+
   public translate(v: Vector) {
     this.mat.translate(v)
     return this
   }
-  public scale(v: Vector) {
+
+  public scale(val: Vector | number) {
+    if (typeof val === 'number') val = Vector.FROM(val, val)
+
+    return this._scale(val)
+  }
+
+  private _scale(v: Vector) {
     this.mat.scale(v)
     return this
   }
@@ -114,6 +124,7 @@ export class Displayable {
     const displayable = (clonedeep(this) as any) as T
     displayable.appendedToDom = false
     displayable.domElement = null
+    displayable.id = randomID()
     return displayable
   }
 
