@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "strict": true,
+    "lib": ["DOM", "ESNext"],
+    "declaration": true,
+    "target": "es5",
+    "module": "commonjs",
+    "rootDir": "src",
+    "resolveJsonModule": true,
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "exclude": ["example"]
+}
